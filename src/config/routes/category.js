@@ -4,7 +4,7 @@ const category = {
     name: 'category',
     hideChildrenInMenu: true,
     redirect: '/category/list',
-    meta: { title: 'category', keepAlive: true, icon: 'folder-open', permission: [ 'dashboard' ] },
+    meta: { title: 'Kategoriya', keepAlive: true, icon: 'folder-open', permission: [ 'dashboard' ] },
       children: [
         {
             path: '/category/list',

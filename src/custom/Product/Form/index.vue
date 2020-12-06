@@ -183,7 +183,10 @@ export default {
         url: '/product/' + product,
         method: 'get'
       }).then(response => {
-        this.product = response.data
+        this.product.description = response.data.description
+        this.product.name = response.data.name
+        this.product.category_id = response.data.category_id
+        this.product.prices = response.data.prices
         this.imageUrlLogo = response.data.image
         this.product.image = response.data.image.split('/')[response.data.image.split('/').length - 1]
       })
@@ -241,6 +244,7 @@ export default {
             method = 'put'
             url = '/product/' + this.productId
           }
+          console.log(data)
           request({
               url: url,
               method: method,
