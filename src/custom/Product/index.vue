@@ -25,11 +25,24 @@
         @change="handleTableChange"
       >
         <template slot="action" slot-scope="text, row">
-          <router-link v-action:update :to="'./update/'+row.slug" >
+          <router-link v-action:update :to="'./update/'+row.id" >
             <a-tooltip><template slot="title">{{ $t('update') }}</template>
               <a-button style="margin-right: 6px" id="buttonUpdate" type="default" icon="edit"></a-button>
             </a-tooltip>
           </router-link>
+          <a-popconfirm
+            v-action:delete
+            placement="topRight"
+            slot="extra"
+            :title="$t('delete')"
+            @confirm="deleteProduct($event, row.id)"
+            :okText="$t('yes')"
+            :cancelText="$t('no')"
+          >
+            <a-tooltip><template slot="title">{{ $t('delete') }}</template>
+              <a-button id="buttonDelete" type="danger" icon="delete"></a-button>
+            </a-tooltip>
+          </a-popconfirm>
         </template>
       </a-table>
     </a-card>
@@ -54,8 +67,8 @@ export default {
           dataIndex: 'name'
         },
         {
-          title: this.$t('Vebsayt'),
-          dataIndex: 'website'
+          title: this.$t('Qisqacha tarif'),
+          dataIndex: 'description'
         },
         {
           title: this.$t('Amallar'),
@@ -72,27 +85,27 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['categories', 'paginationCategories']),
+    ...mapGetters(['categories']),
     getPagination () {
       return this.paginationCategories
     }
   },
   mounted () {
-    this.$store.dispatch('getCategories').then(res => {
-      console.log(res)
+    this.$store.dispatch('getProducts').then(res => {
+      this.loading = false
       this.data = res.data
     })
   },
   beforeDestroy () {
   },
   methods: {
-    ...mapActions(['getCategories']),
+    ...mapActions(['getProducts']),
     handleTableChange (pagination) {
       const paginationNew = {
         ...pagination,
         search: null
       }
-      this.getCategories(paginationNew)
+      this.getProducts(paginationNew)
     .then((res) => console.log(res))
     .catch(err => this.requestFailed(err))
     },
@@ -107,14 +120,14 @@ export default {
     handleCancel () {
       this.previewVisible = false
     },
-    deleteCategory (e, id) {
+    deleteProduct (e, id) {
       request({
-              url: '/categories/' + id,
+              url: '/product/' + id,
               method: 'delete'
           }).then(res => {
               console.log(res)
               this.$message.success(this.$t('successfullyDeleted'))
-              this.getCategories()
+              this.getProducts()
           }).then(err => {
         if (err) {
           this.$message.error(this.$t('error'))

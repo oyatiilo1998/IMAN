@@ -84,7 +84,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['categories', 'paginationCategories']),
+    ...mapGetters(['categories']),
     getPagination () {
       return this.paginationCategories
     }

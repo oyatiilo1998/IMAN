@@ -8,6 +8,7 @@ import user from './modules/user'
 import permission from './modules/permission'
 // custom module import panel
 import category from './modules/Custom/Category'
+import product from './modules/Custom/Product'
 
 Vue.use(Vuex)
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
     permission,
     user,
     app,
-    category
+    category,
+    product
 
   },
   state: {

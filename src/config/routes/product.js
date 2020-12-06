@@ -1,30 +1,30 @@
 /* eslint-disable no-undef */
 const retailer = {
-    path: '/retailer',
-    name: 'retailer',
+    path: '/product',
+    name: 'product',
     hideChildrenInMenu: true,
-    redirect: '/retailer/list',
-    meta: { title: 'retailer', keepAlive: true, icon: 'folder-open', permission: [ 'dashboard' ] },
+    redirect: '/product/list',
+    meta: { title: 'product', keepAlive: true, icon: 'folder-open', permission: [ 'dashboard' ] },
       children: [
         {
-            path: '/retailer/list',
-            name: 'retailer-list',
-            component: () => import('../../custom/Retailer'),
-            meta: { title: 'Список retailer', keepAlive: true }
+            path: '/product/list',
+            name: 'product-list',
+            component: () => import('../../custom/Product'),
+            meta: { title: 'Список product', keepAlive: true }
             // meta: { title: 'cms.settings.forms', keepAlive: true, permission: [ 'dashboard' ] }
         },
         {
-          path: '/retailer/create',
-          name: 'new-retailer',
-          component: () => import('../../custom/Retailer/Form'),
-          meta: { title: 'Новая retailer', keepAlive: true }
+          path: '/product/create',
+          name: 'new-product',
+          component: () => import('../../custom/Product/Form'),
+          meta: { title: 'Новая product', keepAlive: true }
           // meta: { title: 'cms.settings.forms', keepAlive: true, permission: [ 'dashboard' ] }
       },
       {
-        path: '/retailer/update/:id',
-        name: 'edit-retailer',
-        component: () => import('../../custom/Retailer/Form'),
-        meta: { title: 'Изменить retailer', keepAlive: true }
+        path: '/product/update/:id',
+        name: 'edit-product',
+        component: () => import('../../custom/Product/Form'),
+        meta: { title: 'Изменить product', keepAlive: true }
         // meta: { title: 'cms.settings.forms', keepAlive: true, permission: [ 'dashboard' ] }
     }
     ]

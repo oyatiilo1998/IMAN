@@ -1,11 +1,9 @@
 
 import Category from './category'
-import Retailer from './retailer'
 import Product from './product'
 
 const children = [
   Category,
-  Retailer,
   Product
 ]
 

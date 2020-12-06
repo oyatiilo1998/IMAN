@@ -37,7 +37,16 @@ const locale = {
   'app.setting.loading': 'Loading theme',
   'app.setting.copyinfo': 'copy success，please replace defaultSettings in src/models/setting.js',
   'app.setting.production.hint': 'Setting panel shows in development environment only, please manually modify',
-  'categories': 'Kategoriyalar'
+  'categories': 'Kategoriyalar',
+  'list': "Ro'yxat",
+  'action': 'bajariladigan amal',
+  'save': 'Saqlash',
+  'add': "Qo'shish",
+  'shop': 'Magazin',
+  'price': 'Narxi',
+  'image': 'Mahsulot rasmi',
+  'upload': 'Yuklang',
+  'delete': "o'chirishni xohlaysizmi?"
 }
 
 export default {
