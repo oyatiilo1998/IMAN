@@ -10,111 +10,143 @@
         </a-breadcrumb>
       </a-col>
     </a-row>
-
-    <a-card :title="$t('Forma')">
+    <a-card>
+      <a-divider> Details for route js </a-divider>
       <template>
         <a-form-model
           @submit="onSubmit"
-          ref="ruleForm"
-          :model="product"
-          :rules="rules"
+          ref="routeForm"
+          :model="route"
+          :rules="rulesRoute"
           :label-col="labelCol"
           :wrapper-col="wrapperCol"
         >
           <a-row>
             <a-col :md="8" :xs="24" style="padding: 0 15px">
-              <a-form-model-item :label="$t('Nomi')" prop="nomi">
+              <a-form-model-item :label="$t('name')" prop="name">
                 <a-input
-                  :placeholder="$t('Nomi')"
-                  v-model="product.name"
+                  :placeholder="$t('name')"
+                  v-model="route.name"
                 />
               </a-form-model-item>
             </a-col>
             <a-col :md="8" :xs="24" style="padding: 0 15px">
-              <a-form-model-item :label="$t('Qisqacha tarif')" prop="tarif">
+              <a-form-model-item :label="$t('icon')" prop="icon">
                 <a-input
-                  :placeholder="$t('Qisqacha tarif')"
-                  v-model="product.description"
+                  :placeholder="$t('icon')"
+                  v-model="route.icon"
+                />
+              </a-form-model-item>
+            </a-col>
+          </a-row>
+        </a-form-model>
+        <a-divider> Details for store js </a-divider>
+        <a-form-model
+          @submit="onSubmit"
+          ref="storeForm"
+          :model="store"
+          :rules="rulesStore"
+          :label-col="labelCol"
+          :wrapper-col="wrapperCol"
+        >
+          <a-row>
+            <a-col :md="8" :xs="24" style="padding: 0 15px">
+              <a-form-model-item :label="$t('customUrl')" prop="customUrl">
+                <a-input
+                  :placeholder="$t('customUrl')"
+                  v-model="store.customUrl"
                 />
               </a-form-model-item>
             </a-col>
             <a-col :md="8" :xs="24" style="padding: 0 15px">
-              <a-form-model-item :label="$t('Kategoriya')" prop="tarif">
-                <a-select
-                  :placeholder="$t('Kategoriya')"
-                  v-model="product.category_id"
-                >
-                  <a-select-option v-for="d in categoryData" :key="d.id" :value="d.id">
-                    {{ d.name }}
-                  </a-select-option>
-                </a-select>
+              <a-form-model-item :label="$t('response_from_request')" prop="response_from_request">
+                <a-input
+                  :placeholder="$t('response_from_request')"
+                  v-model="route.response_from_request"
+                />
               </a-form-model-item>
             </a-col>
+          </a-row>
+        </a-form-model>
+        <a-divider> Details for create js </a-divider>
+        <a-form-model
+          @submit="onSubmit"
+          ref="storeForm"
+          :model="create"
+          :rules="rulesCreate"
+          :label-col="labelCol"
+          :wrapper-col="wrapperCol"
+        >
+          <a-row>
             <a-col span="24">
               <a-row>
                 <div
-                  v-for="(k, index) in product.prices"
+                  v-for="(k, index) in create.inputs"
                   :key="index">
-                  <a-col :xs="24" :md="7" style="padding: 0 15px">
-                    <a-form-model-item :label="$t('shop')" prop="shop">
-                      <a-input
-                        :placeholder="$t('shop')"
-                        v-model="product.prices[index].shop" />
-                    </a-form-model-item>
-                  </a-col>
-                  <a-col :xs="24" :md="7" style="padding: 0 15px">
-                    <a-form-model-item :label="$t('URL')" prop="url">
-                      <a-input
-                        :placeholder="$t('url')"
-                        v-model="product.prices[index].url" />
-                    </a-form-model-item>
-                  </a-col>
-                  <a-col :xs="24" :md="7">
-                    <a-form-model-item :label="$t('price')" prop="price">
-                      <a-input
-                        type="number"
-                        :placeholder="$t('price')"
-                        v-model="product.prices[index].price" />
-                    </a-form-model-item>
-                  </a-col>
-                  <a-col :xs="3" :md="3" style="padding: 0 15px">
-                    <a-icon
-                      v-if="product.prices.length > 1"
-                      class="dynamic-delete-button"
-                      type="minus-circle-o"
-                      @click="() => remove(k, index)"
-                    />
-                  </a-col>
+                  <a-card style="margin-bottom: 8px">
+                    <a-col :xs="24" :md="6" style="padding: 0 15px">
+                      <a-form-model-item :label="$t('variable')" prop="variable">
+                        <a-input
+                          :placeholder="$t('variable')"
+                          v-model="create.inputs[index].variable" />
+                      </a-form-model-item>
+                    </a-col>
+                    <a-col :xs="24" :md="4" style="padding: 0 15px">
+                      <a-form-model-item :label="$t('type')" prop="type">
+                        <a-select
+                          :placeholder="$t('type')"
+                          v-model="create.inputs[index].type">
+                          <a-select-option key="select" value="select">
+                            Select
+                          </a-select-option>
+                          <a-select-option key="input" value="input">
+                            Input
+                          </a-select-option>
+                          <a-select-option key="textarea" value="textarea">
+                            Textarea
+                          </a-select-option>
+                          <a-select-option key="checkbox" value="checkbox">
+                            Checkbox
+                          </a-select-option>
+                          <a-select-option key="switch" value="switch">
+                            Switch
+                          </a-select-option>
+                        </a-select>
+                      </a-form-model-item>
+                    </a-col>
+                    <a-col :xs="24" :md="6" style="padding: 0 15px">
+                      <a-form-model-item :label="$t('column')" prop="column">
+                        <a-input
+                          type="number"
+                          :placeholder="$t('column')"
+                          v-model="create.inputs[index].column" />
+                      </a-form-model-item>
+                    </a-col>
+                    <a-col :xs="24" :md="6" style="padding: 0 15px">
+                      <a-form-model-item :label="$t('regEx')" prop="regEx">
+                        <a-input
+                          :placeholder="$t('regEx')"
+                          v-model="create.inputs[index].regEx" />
+                      </a-form-model-item>
+                    </a-col>
+                    <a-col :xs="2" style="padding: 0 15px">
+                      <a-icon
+                        v-if="create.inputs.length > 1"
+                        class="dynamic-delete-button"
+                        type="minus-circle-o"
+                        @click="() => remove(k, index)"
+                      />
+                    </a-col>
+                  </a-card>
                 </div>
                 <a-col :xs="24">
                   <a-form-item>
-                    <a-button type="dashed" style="margin: auto auto auto 15px; width: 100%" @click="add">
+                    <a-button type="dashed" style="margin: 15px auto auto 15px; width: 100%" @click="add">
                       <a-icon type="plus" /> {{ $t('add') }}
                     </a-button>
                   </a-form-item>
                 </a-col>
               </a-row>
-            </a-col>
-            <a-col :span="24" style="padding: 0 15px">
-              <a-form-model-item :label="$t('image')">
-                <a-upload
-                  name="file"
-                  list-type="picture-card"
-                  class="avatar-uploader"
-                  :show-upload-list="false"
-                  action="https://migration.track.uz/v1/upload"
-                  :before-upload="beforeUploadLogo"
-                  @change="handleChangeLogoImage"
-                >
-                  <img v-if="imageUrlLogo" :src="imageUrlLogo" alt="avatar" />
-                  <div v-else>
-                    <a-icon :type="loadingLogo ? 'loading' : 'plus'" />
-                    <div class="ant-upload-text">
-                      {{ $t('upload') }}
-                    </div>
-                  </div>
-                </a-upload>
-              </a-form-model-item>
             </a-col>
             <a-col :span="24" style="padding: 0 15px">
               <a-form-model-item>
@@ -130,14 +162,12 @@
   </div>
 </template>
 <script>
-import request from '@/utils/request'
-import { mapActions } from 'vuex'
 
-function getBase64 (img, callback) {
-  const reader = new FileReader()
-  reader.addEventListener('load', () => callback(reader.result))
-  reader.readAsDataURL(img)
-}
+// function getBase64 (img, callback) {
+//   const reader = new FileReader()
+//   reader.addEventListener('load', () => callback(reader.result))
+//   reader.readAsDataURL(img)
+// }
 export default {
   data () {
     return {
@@ -145,24 +175,27 @@ export default {
       labelCol: { span: 24 },
       wrapperCol: { span: 24 },
       imageUrlLogo: '',
+      routeJs: null,
       loadingLogo: false,
       other: '',
       categoryData: [],
       loading: false,
-      product: {
-        category_id: null,
-        name: null,
-        image: null,
-        description: null,
-        prices: [
-          {
-            price: null,
-            shop: null,
-            url: null
-          }
-        ]
+      create: {
+        inputs: [{
+          variable: null,
+          type: null,
+          column: null,
+          regEx: null
+        }]
       },
-      rules: {
+      store: {},
+      route: {
+        name: null,
+        icon: null
+      },
+      rulesStore: {},
+      rulesCreate: {},
+      rulesRoute: {
         name: [
           { required: true, message: this.$t('required'), trigger: 'change' }
         ]
@@ -177,94 +210,62 @@ export default {
     if (this.productId) this.getProductAttrs(this.productId)
   },
   methods: {
-    ...mapActions(['getProduct', 'getCategories']),
-    getProductAttrs (product) {
-      request({
-        url: '/product/' + product,
-        method: 'get'
-      }).then(response => {
-        this.product.description = response.data.description
-        this.product.name = response.data.name
-        this.product.category_id = response.data.category_id
-        this.product.prices = response.data.prices
-        this.imageUrlLogo = response.data.image
-        this.product.image = response.data.image.split('/')[response.data.image.split('/').length - 1]
-      })
-    },
     remove (k, index) {
-      this.product.prices.splice(index, 1)
-      console.log(this.product.prices)
+      this.create.inputs.splice(index, 1)
     },
 
     add () {
-      this.product.prices.push({
+      this.create.inputs.push({
         duration: null,
         price: null
       })
     },
-    handleChangeLogoImage (info, index) {
-      if (info.file.status === 'uploading') {
-        console.log('aa')
-        this.loadingLogo = true
-        return
-      }
-      if (info.file.status === 'done') {
-        getBase64(info.file.originFileObj, imageUrl => {
-          this.imageUrlLogo = imageUrl
-          this.loadingLogo = false
-          this.product.image = info.file.response.filename
-        })
-      }
-    },
-    beforeUploadLogo (file) {
-      const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
-      if (!isJpgOrPng) {
-        this.$message.error('You can only upload JPG file!')
-      }
-      const isLt2M = file.size / 1024 / 1024 < 2
-      if (!isLt2M) {
-        this.$message.error('Image must smaller than 2MB!')
-      }
-      return isJpgOrPng && isLt2M
-    },
     onSubmit (e) {
       e.preventDefault()
-      this.$refs.ruleForm.validate(valid => {
-        if (valid) {
-          var url = '/product'
-          var method = 'post'
-          this.product.prices.map((product, index) => {
-            this.product.prices[index].price = parseInt(this.product.prices[index].price)
-          })
-          var data = this.product
-          const headers = {
-            'Content-Type': 'application/json'
-          }
-          if (this.productId) {
-            method = 'put'
-            url = '/product/' + this.productId
-          }
-          console.log(data)
-          request({
-              url: url,
-              method: method,
-              data: data,
-              headers: headers
-          }).then(res => {
-            this.getCategories()
-            this.$router.replace('/product/list')
-          }).catch(err => {
-            if (err) {
-              console.log(err)
-              this.$message.error(err.response.data.error)
-            }
-          })
-          console.log('valid')
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
+      // download js used in route
+
+      const routeFunction = require('./downloads/routeGenerate')
+      const routejs = routeFunction.routeGenerate({ icon: this.route.icon, name: this.route.name })
+      var blob = new Blob([routejs], { type: 'js' })
+      var a = document.createElement('a')
+      a.download = `${this.route.name}Route.js`
+      a.href = URL.createObjectURL(blob)
+      a.dataset.downloadurl = ['js', a.download, a.href].join(':')
+      a.style.display = 'none'
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      setTimeout(function () { URL.revokeObjectURL(a.href) }, 1500)
+
+      // download js used in route
+
+      const storeFunction = require('./downloads/storeGenerate')
+      const storejs = storeFunction.storeGenerate({ customUrl: this.store.customUrl, response_from_request: this.store.response_from_request, name: this.route.name })
+      var blobstore = new Blob([storejs], { type: 'js' })
+      var aStore = document.createElement('a')
+      aStore.download = `${this.route.name}Store.js`
+      aStore.href = URL.createObjectURL(blobstore)
+      aStore.dataset.downloadurl = ['js', aStore.download, aStore.href].join(':')
+      aStore.style.display = 'none'
+      document.body.appendChild(aStore)
+      aStore.click()
+      document.body.removeChild(aStore)
+      setTimeout(function () { URL.revokeObjectURL(aStore.href) }, 1500)
+
+      // download js used in route
+
+      const createFunction = require('./downloads/createGenerate')
+      const createjs = createFunction.createGenerate({ name: this.route.name, inputs: this.create.inputs })
+      var blobcreate = new Blob([createjs], { type: 'vue' })
+      var aCreate = document.createElement('a')
+      aCreate.download = `${this.route.name}Create.vue`
+      aCreate.href = URL.createObjectURL(blobcreate)
+      aCreate.dataset.downloadurl = ['vue', aCreate.download, aCreate.href].join(':')
+      aCreate.style.display = 'none'
+      document.body.appendChild(aCreate)
+      aCreate.click()
+      document.body.removeChild(aCreate)
+      setTimeout(function () { URL.revokeObjectURL(aCreate.href) }, 1500)
     },
     resetForm () {
       this.$refs.ruleForm.resetFields()

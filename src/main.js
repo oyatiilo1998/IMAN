@@ -33,7 +33,8 @@ Vue.component('page-container', PageHeaderWrapper)
 Vue.component('page-header-wrapper', PageHeaderWrapper)
 
 window.umi_plugin_ant_themeVar = themePluginConfig.theme
-
+const fs = require('fs')
+Vue.use(fs)
 new Vue({
   router,
   store,
