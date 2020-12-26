@@ -22,7 +22,7 @@
           :wrapper-col="wrapperCol"
         >
           <a-row>
-            <a-col :md="8" :xs="24" style="padding: 0 15px">
+            <a-col :md="12" :xs="24" style="padding: 0 15px">
               <a-form-model-item :label="$t('name')" prop="name">
                 <a-input
                   :placeholder="$t('name')"
@@ -30,7 +30,7 @@
                 />
               </a-form-model-item>
             </a-col>
-            <a-col :md="8" :xs="24" style="padding: 0 15px">
+            <a-col :md="12" :xs="24" style="padding: 0 15px">
               <a-form-model-item :label="$t('icon')" prop="icon">
                 <a-input
                   :placeholder="$t('icon')"
@@ -50,7 +50,7 @@
           :wrapper-col="wrapperCol"
         >
           <a-row>
-            <a-col :md="8" :xs="24" style="padding: 0 15px">
+            <a-col :md="12" :xs="24" style="padding: 0 15px">
               <a-form-model-item :label="$t('customUrl')" prop="customUrl">
                 <a-input
                   :placeholder="$t('customUrl')"
@@ -58,7 +58,7 @@
                 />
               </a-form-model-item>
             </a-col>
-            <a-col :md="8" :xs="24" style="padding: 0 15px">
+            <a-col :md="12" :xs="24" style="padding: 0 15px">
               <a-form-model-item :label="$t('response_from_request')" prop="response_from_request">
                 <a-input
                   :placeholder="$t('response_from_request')"
