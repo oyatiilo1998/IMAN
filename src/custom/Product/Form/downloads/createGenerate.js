@@ -70,7 +70,7 @@ export function createGenerate (object) {
 							return (
 						`${obj.variable}: [
 							{ pattern: '${obj.regEx}', message: this.$t('invalid'), trigger: 'change' }
-						],`)
+						]`)
 						}
 					})}					
         }

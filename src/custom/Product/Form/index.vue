@@ -84,14 +84,14 @@
                   v-for="(k, index) in create.inputs"
                   :key="index">
                   <a-card style="margin-bottom: 8px">
-                    <a-col :xs="24" :md="6" style="padding: 0 15px">
+                    <a-col :xs="24" :md="5" style="padding: 0 15px">
                       <a-form-model-item :label="$t('variable')" prop="variable">
                         <a-input
                           :placeholder="$t('variable')"
                           v-model="create.inputs[index].variable" />
                       </a-form-model-item>
                     </a-col>
-                    <a-col :xs="24" :md="4" style="padding: 0 15px">
+                    <a-col :xs="24" :md="5" style="padding: 0 15px">
                       <a-form-model-item :label="$t('type')" prop="type">
                         <a-select
                           :placeholder="$t('type')"
@@ -114,7 +114,7 @@
                         </a-select>
                       </a-form-model-item>
                     </a-col>
-                    <a-col :xs="24" :md="6" style="padding: 0 15px">
+                    <a-col :xs="24" :md="5" style="padding: 0 15px">
                       <a-form-model-item :label="$t('column')" prop="column">
                         <a-input
                           type="number"
@@ -122,11 +122,21 @@
                           v-model="create.inputs[index].column" />
                       </a-form-model-item>
                     </a-col>
-                    <a-col :xs="24" :md="6" style="padding: 0 15px">
+                    <a-col :xs="24" :md="5" style="padding: 0 15px">
                       <a-form-model-item :label="$t('regEx')" prop="regEx">
                         <a-input
                           :placeholder="$t('regEx')"
                           v-model="create.inputs[index].regEx" />
+                      </a-form-model-item>
+                    </a-col>
+                    <a-col :xs="24" :md="2" style="padding: 0 15px">
+                      <a-form-model-item :label="$t('isInListColumn')" prop="isInListColumn">
+                        <a-switch
+                          :checked-children="$t('InList')"
+                          :un-checked-children="$t('notInList')"
+                          default-checked
+                          v-model="create.inputs[index].isInListColumn"
+                        />
                       </a-form-model-item>
                     </a-col>
                     <a-col :xs="2" style="padding: 0 15px">
@@ -185,6 +195,7 @@ export default {
           variable: null,
           type: null,
           column: null,
+          isInListColumn: null,
           regEx: null
         }]
       },
@@ -203,11 +214,6 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('getCategories').then(res => {
-      this.loading = false
-      this.categoryData = res.data
-    })
-    if (this.productId) this.getProductAttrs(this.productId)
   },
   methods: {
     remove (k, index) {
@@ -252,7 +258,7 @@ export default {
       document.body.removeChild(aStore)
       setTimeout(function () { URL.revokeObjectURL(aStore.href) }, 1500)
 
-      // download js used in route
+      // download js used in create
 
       const createFunction = require('./downloads/createGenerate')
       const createjs = createFunction.createGenerate({ name: this.route.name, inputs: this.create.inputs })
@@ -266,6 +272,21 @@ export default {
       aCreate.click()
       document.body.removeChild(aCreate)
       setTimeout(function () { URL.revokeObjectURL(aCreate.href) }, 1500)
+
+      // download js used in list
+
+      const listFunction = require('./downloads/listGenerate')
+      const listjs = listFunction.listGenerate({ name: this.route.name, inputs: this.create.inputs })
+      var bloblist = new Blob([listjs], { type: 'vue' })
+      var aList = document.createElement('a')
+      aList.download = `${this.route.name}List.vue`
+      aList.href = URL.createObjectURL(bloblist)
+      aList.dataset.downloadurl = ['vue', aList.download, aList.href].join(':')
+      aList.style.display = 'none'
+      document.body.appendChild(aList)
+      aList.click()
+      document.body.removeChild(aList)
+      setTimeout(function () { URL.revokeObjectURL(aList.href) }, 1500)
     },
     resetForm () {
       this.$refs.ruleForm.resetFields()
