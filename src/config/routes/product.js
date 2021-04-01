@@ -4,7 +4,7 @@ const retailer = {
     name: 'product',
     hideChildrenInMenu: true,
     redirect: '/product/list',
-    meta: { title: 'Mahsulot', keepAlive: true, icon: 'folder-open', permission: [ 'dashboard' ] },
+    meta: { title: 'product', keepAlive: true, icon: 'folder-open', permission: [ 'dashboard' ] },
       children: [
         {
             path: '/product/list',
