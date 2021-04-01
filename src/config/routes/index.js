@@ -1,10 +1,8 @@
 
-import Category from './category'
-import Product from './product'
+import Constructor from './constructor'
 
 const children = [
-  Category,
-  Product
+  Constructor
 ]
 
 export default children.map(el => ({ ...el,

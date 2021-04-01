@@ -37,8 +37,8 @@
             v-action:delete
             placement="topRight"
             slot="extra"
-            :title="$t('delete')"
-            @confirm="deleteCategory(row.id)"
+            :title="$t('deleteMsg')"
+            @confirm="deleteCategory($event, row.slug)"
             :okText="$t('yes')"
             :cancelText="$t('no')"
           >
@@ -119,18 +119,14 @@ export default {
     handleCancel () {
       this.previewVisible = false
     },
-    deleteCategory (id) {
-      console.log(id)
+    deleteCategory (e, id) {
       request({
-              url: '/category/' + id,
+              url: '/categories/' + id,
               method: 'delete'
           }).then(res => {
               console.log(res)
-              this.$message.success(this.$t('Muvaffaqiyatli amalga oshdi'))
-              this.$store.dispatch('getCategories').then(res => {
-                this.loading = false
-                this.data = res.data
-              })
+              this.$message.success(this.$t('successfullyDeleted'))
+              this.getCategories()
           }).then(err => {
         if (err) {
           this.$message.error(this.$t('error'))

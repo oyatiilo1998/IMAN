@@ -3,7 +3,7 @@
     <a-row>
       <a-col :span="12">
         <a-breadcrumb style="margin: 10px 5px">
-          <a-breadcrumb-item>{{ $t('Mahsulotlar') }}</a-breadcrumb-item>
+          <a-breadcrumb-item>{{ $t('categories') }}</a-breadcrumb-item>
         </a-breadcrumb>
       </a-col>
 
@@ -126,11 +126,8 @@ export default {
               method: 'delete'
           }).then(res => {
               console.log(res)
-              this.$message.success(this.$t('Muvaffaqiyatli amalga oshdi'))
-              this.$store.dispatch('getProducts').then(res => {
-                this.loading = false
-                this.data = res.data
-              })
+              this.$message.success(this.$t('successfullyDeleted'))
+              this.getProducts()
           }).then(err => {
         if (err) {
           this.$message.error(this.$t('error'))
